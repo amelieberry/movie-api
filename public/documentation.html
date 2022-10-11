@@ -47,27 +47,25 @@
                     <td>GET</td>
                     <td> - </td>
                     <td> - </td>
-                    <td>A JSON object holding data about a single movie, structured like:
-                        <pre>
-                            <code>
-                                {
-                                    "Title": "Movie One",
-                                    "Description": "That's a description",
-                                    "Genre": {
-                                        "Name": "Comedy",
-                                        "Description": "Comedy is funny stuff"
-                                    },
-                                    "Director": {
-                                        "Name": "Dir Ector",
-                                        "Bio": "About Dir Ector",
-                                        "Birth": 1988
-                                    },
-                                    "Actors": ["Act Or", "Ac Tor"],
-                                    "ImageURL": "https://url.com",
-                                    "Featured": false
-                                }
-                            </code>
-                        </pre> 
+                    <td>A JSON object holding data about a single movie, structured like:<br>
+                        <code>
+                            {
+                                "Title": "Movie One",
+                                "Description": "That's a description",
+                                "Genre": {
+                                    "Name": "Comedy",
+                                    "Description": "Comedy is funny stuff"
+                                },
+                                "Director": {
+                                    "Name": "Dir Ector",
+                                    "Bio": "About Dir Ector",
+                                    "Birth": 1988
+                                },
+                                "Actors": ["Act Or", "Ac Tor"],
+                                "ImageURL": "https://url.com",
+                                "Featured": false
+                            }
+                        </code>
                     </td>
                 </tr>
                 <tr>
@@ -76,15 +74,13 @@
                     <td>GET</td>
                     <td>:genreName (the name of the genre (e.g. “Thriller”))</td>
                     <td> - </td>
-                    <td>A JSON object holding the name and description of a genre, structured like:
-                        <pre>
-                            <code>
-                                {
-                                    "Name": "Comedy",
-                                    "Description": "Comedy is funny stuff"
-                                }  
-                            </code>
-                        </pre> 
+                    <td>A JSON object holding the name and description of a genre, structured like:<br>
+                        <code>
+                            {
+                                "Name": "Comedy",
+                                "Description": "Comedy is funny stuff"
+                            }  
+                        </code>
                     </td>
                 </tr>
                 <tr>
@@ -94,16 +90,14 @@
                     <td>:directorName (the name of the movie director) 
                         </td>
                     <td> - </td>
-                    <td>A JSON object holding data about the specified director, structured like:
-                        <pre>
-                            <code>
-                                {
-                                    "Name": "Dir Ector",
-                                    "Bio": "About Dir Ector",
-                                    "Birth": 1988
-                                }  
-                            </code>
-                        </pre> 
+                    <td>A JSON object holding data about the specified director, structured like:<br>
+                        <code>
+                            {
+                                "Name": "Dir Ector",
+                                "Bio": "About Dir Ector",
+                                "Birth": 1988
+                            }  
+                        </code>
                     </td>
                 </tr>
                 <tr>
@@ -111,32 +105,28 @@
                     <td>/users</td>
                     <td>POST</td>
                     <td> - </td>
-                    <td>A JSON object holding data about the user to add, structured like:
-                        <pre>
-                            <code>
-                                {
-                                    username: "Ano Nymous",
-                                    password: "greatPassword3",
-                                    email: "email3@mail.com",
-                                    dataOfBirth: "3/1/1995",
-                                    favoriteMovies: []
-                                }     
-                            </code>
-                        </pre>
+                    <td>A JSON object holding data about the user to add, structured like:<br>
+                        <code>
+                            {
+                                username: "Ano Nymous",
+                                password: "greatPassword3",
+                                email: "email3@mail.com",
+                                dataOfBirth: "3/1/1995",
+                                favoriteMovies: []
+                            }     
+                        </code>
                     </td>
-                    <td>A JSON object holding data about the new user, including their created ID, structured like:
-                        <pre>
-                            <code>
-                                {
-                                    id: 3,
-                                    username: "Ano Nymous",
-                                    password: "greatPassword3",
-                                    email: "email3@mail.com",
-                                    dataOfBirth: "3/1/1995",
-                                    favoriteMovies: []
-                                }   
-                            </code>
-                        </pre> 
+                    <td>A JSON object holding data about the new user, including their created ID, structured like:<br>
+                        <code>
+                            {
+                                id: 3,
+                                username: "Ano Nymous",
+                                password: "greatPassword3",
+                                email: "email3@mail.com",
+                                dataOfBirth: "3/1/1995",
+                                favoriteMovies: []
+                            }   
+                        </code>
                     </td>
                 </tr>
                 <tr>
@@ -145,31 +135,27 @@
                     <td>PUT</td>
                     <td>:username (the username of the user)</td>
                     <td>A JSON object holding data about the existing user, structured like:
-                        <pre>
-                            <code>
-                                {
-                                    username: "Ano Nymous",
-                                    password: "greatPassword3",
-                                    email: "email3@mail.com",
-                                    dataOfBirth: "3/1/1995",
-                                    favoriteMovies: []
-                                }     
-                            </code>
-                        </pre>
+                        <code>
+                            {
+                                username: "Ano Nymous",
+                                password: "greatPassword3",
+                                email: "email3@mail.com",
+                                dataOfBirth: "3/1/1995",
+                                favoriteMovies: []
+                            }     
+                        </code>
                     </td>
-                    <td>A JSON object holding the updated user data, including their ID, structured like:
-                        <pre>
-                            <code>
-                                {
-                                    id: 3,
-                                    username: "Axel Doe",
-                                    password: "greatPassword3",
-                                    email: "email3@mail.com",
-                                    dataOfBirth: "3/1/1995",
-                                    favoriteMovies: []
-                                }                                    
-                            </code>
-                        </pre> 
+                    <td>A JSON object holding the updated user data, including their ID, structured like:<br>
+                        <code>
+                            {
+                                id: 3,
+                                username: "Axel Doe",
+                                password: "greatPassword3",
+                                email: "email3@mail.com",
+                                dataOfBirth: "3/1/1995",
+                                favoriteMovies: []
+                            }                                    
+                        </code>
                     </td>
                 </tr>
                 <tr>
@@ -178,20 +164,17 @@
                     <td>POST</td>
                     <td>:username (the username of the user), :movieID (the Id of the added movie)</td>
                     <td> - </td>
-                    <td>A JSON object holding the updated user data, including the new favorited movie, structured like:
-                        <pre>
-                            <code>
-                                {
-                                    id: 1,
-                                    username: "Jane Doe",
-                                    password: "greatPassword",
-                                    email: "email@mail.com",
-                                    dataOfBirth: "1/1/1995",
-                                    favoriteMovies: ["Movie Two"]
-                                }
-                                                                     
-                            </code>
-                        </pre> 
+                    <td>A JSON object holding the updated user data, including the new favorited movie, structured like:<br>
+                        <code>
+                            {
+                                id: 1,
+                                username: "Jane Doe",
+                                password: "greatPassword",
+                                email: "email@mail.com",
+                                dataOfBirth: "1/1/1995",
+                                favoriteMovies: ["Movie Two"]
+                            }                                      
+                        </code>
                     </td>
                 </tr>
                 <tr>
