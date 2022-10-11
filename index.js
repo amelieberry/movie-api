@@ -106,7 +106,21 @@ app.get('/movies/:title', (req, res) => {
     }
 });
 
-// Get data about a genre
+// GET data about a genre
+app.get('/movies/genre/:genreName', (req, res) => {
+    const { genreName } = req.params;
+    const genre = movies.find(movie => movie.Genre === genreName).Genre;
+
+    if (genre) {
+        res.status(200).json(genre);
+    } else {
+        res.status(400).send('No such genre');
+    }
+});
+
+// GET data about a director by name
+
+
 // Serve the documentation.html file from the public folder
 app.use(express.static('public'));
 
