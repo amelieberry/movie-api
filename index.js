@@ -11,7 +11,66 @@ const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {f
 //set up the logger
 app.use(morgan('combined', {stream: accessLogStream}));
 
-let movies = [];
+let users = [
+    {
+        id: 1,
+        username: "Jane Doe",
+        favoriteMovies: []
+    },
+    {
+        id: 2,
+        username: "John Doe",
+        favoriteMovies: ["Movie One"]
+    }
+];
+
+let movies = [
+    {
+        "Title": "Movie One",
+        "Description": "That's a description",
+        "Genre": {
+            "Name": "Comedy",
+            "Description": "Comedy is funny stuff"
+        },
+        "Director": {
+            "Name": "Dir Ector",
+            "Bio": "About Dir Ector",
+            "Birth": 1988
+        },
+        "ImageURL": "https://url.com",
+        "Featured": false
+    },
+    {
+        "Title": "Movie Two",
+        "Description": "That's a description",
+        "Genre": {
+            "Name": "Action",
+            "Description": "Action is less talking more acting"
+        },
+        "Director": {
+            "Name": "Direc Tor",
+            "Bio": "About Direc Tor",
+            "Birth": 1950
+        },
+        "ImageURL": "https://url2.com",
+        "Featured": false
+    },
+    {
+        "Title": "Movie Three",
+        "Description": "That's a description",
+        "Genre": {
+            "Name": "Sci-Fi",
+            "Description": "Sci-Fi is a bunch of crazy stuff happening"
+        },
+        "Director": {
+            "Name": "Di Rector",
+            "Bio": "About Di Rector",
+            "Birth": 1976
+        },
+        "ImageURL": "https://url2.com",
+        "Featured": false
+    }
+];
 
 // GET requests
 app.get('/', (req, res) => {
