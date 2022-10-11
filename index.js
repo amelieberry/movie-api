@@ -1,9 +1,14 @@
 const express = require('express'),
+    app = express(),
     morgan = require('morgan'),
     fs = require('fs'),
-    path = require('path');
+    path = require('path'),
+    bodyParser = require('body-parser'),
+    uuid = require('uuid');
 
-const app = express();
+app.use(bodyParser.json());
+
+
 
 // Append Morgan logs to log.txt
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
@@ -101,5 +106,5 @@ app.use((err, req, res, next) => {
 
 // listen for requests
 app.listen(8080, '0.0.0.0', () => {
-    console.log('Your app is listening on port 8080.');
+    console.log('Your app is running on http://localhost:8080.');
 });
