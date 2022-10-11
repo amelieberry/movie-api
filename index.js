@@ -87,6 +87,17 @@ let movies = [
 //CREATE
 
 // Allow new users to register
+app.post('/users', (req, res) => {
+    const newUser = req.body;
+
+    if (newUser.username) {
+        newUser.id = uuid.v4();
+        users.push(newUser);
+        res.status(201).json(newUser);
+    } else {
+        res.status(400).send('users need names');
+    }
+});
 
 // READ
 
@@ -115,7 +126,7 @@ app.get('/movies/:title', (req, res) => {
 // GET data about a genre
 app.get('/movies/genre/:genreName', (req, res) => {
     const { genreName } = req.params;
-    const genre = movies.find(movie => movie.Genre === genreName).Genre;
+    const genre = movies.find(movie => movie.Genre.Name === genreName).Genre;
 
     if (genre) {
         res.status(200).json(genre);
