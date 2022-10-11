@@ -15,11 +15,17 @@ let users = [
     {
         id: 1,
         username: "Jane Doe",
+        password: "greatPassword",
+        emai: "email@mail.com",
+        dataOfBith: "1/1/1995",
         favoriteMovies: []
     },
     {
         id: 2,
         username: "John Doe",
+        password: "greatPassword2",
+        emai: "email2@mail.com",
+        dataOfBith: "2/1/1995",
         favoriteMovies: ["Movie One"]
     }
 ];
@@ -37,6 +43,7 @@ let movies = [
             "Bio": "About Dir Ector",
             "Birth": 1988
         },
+        "Actors": ["Act Or", "Ac Tor"],
         "ImageURL": "https://url.com",
         "Featured": false
     },
@@ -52,6 +59,7 @@ let movies = [
             "Bio": "About Direc Tor",
             "Birth": 1950
         },
+        "Actors": ["Act Or", "A C Tor"],
         "ImageURL": "https://url2.com",
         "Featured": false
     },
@@ -67,6 +75,7 @@ let movies = [
             "Bio": "About Di Rector",
             "Birth": 1976
         },
+        "Actors": ["Actor", "Ac Tor"],
         "ImageURL": "https://url2.com",
         "Featured": false
     }
