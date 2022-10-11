@@ -79,10 +79,16 @@ let movies = [
             "Birth": 1976
         },
         "Actors": ["Actor", "Ac Tor"],
-        "ImageURL": "https://url2.com",
+        "ImageURL": "https://url3.com",
         "Featured": false
     }
 ];
+
+//CREATE
+
+// Allow new users to register
+
+// READ
 
 // GET requests
 app.get('/', (req, res) => {
@@ -119,7 +125,16 @@ app.get('/movies/genre/:genreName', (req, res) => {
 });
 
 // GET data about a director by name
+app.get('/movies/directors/:directorName', (req, res) => {
+    const { directorName } = req.params;
+    const director = movies.find(movie => movie.Director === directorName).Director;
 
+    if (director) {
+        res.status(200).json(director);
+    } else {
+        res.status(400).send('No such director');
+    }
+});
 
 // Serve the documentation.html file from the public folder
 app.use(express.static('public'));
