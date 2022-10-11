@@ -8,8 +8,6 @@ const express = require('express'),
 
 app.use(bodyParser.json());
 
-
-
 // Append Morgan logs to log.txt
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
 
@@ -91,10 +89,24 @@ app.get('/', (req, res) => {
     res.send('test text');
 });
 
+// GET a list of all movies
 app.get('/movies', (req, res) => {
-    res.json(movies);
+    res.status(200).json(movies);
 });
 
+// GET data about a single movie by title
+app.get('/movies/:title', (req, res) => {
+    const { title } = req.params;
+    const movie = movies.find(movie => movie.Title === title);
+
+    if (movie) {
+        res.status(200).json(movie);
+    } else {
+        res.status(400).send('No such movie');
+    }
+});
+
+// Get data about a genre
 // Serve the documentation.html file from the public folder
 app.use(express.static('public'));
 
