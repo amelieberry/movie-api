@@ -16,16 +16,16 @@ let users = [
         id: 1,
         username: "Jane Doe",
         password: "greatPassword",
-        emai: "email@mail.com",
-        dataOfBith: "1/1/1995",
+        email: "email@mail.com",
+        dataOfBirth: "1/1/1995",
         favoriteMovies: []
     },
     {
         id: 2,
         username: "John Doe",
         password: "greatPassword2",
-        emai: "email2@mail.com",
-        dataOfBith: "2/1/1995",
+        email: "email2@mail.com",
+        dataOfBirth: "2/1/1995",
         favoriteMovies: ["Movie One"]
     }
 ];

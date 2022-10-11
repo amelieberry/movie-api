@@ -20,5 +20,197 @@
             <li>Allow users to remove a movie from their list of favorites</li>
             <li>Allow existing users to deregister</li>
         </ul>
+        <h2>API Endpoints</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Business Logic</th>
+                    <th>URL</th>
+                    <th>HTTP Method</th>
+                    <th>Parameters</th>
+                    <th>Request body data format</th>
+                    <th>Response body data format</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Get a list of all movies</td>
+                    <td>/movies</td>
+                    <td>GET</td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td>A JSON object holding data about all the movies</td>
+                </tr>
+                <tr>
+                    <td>Get data about a single movie by title</td>
+                    <td>/movies/:title</td>
+                    <td>GET</td>
+                    <td> - </td>
+                    <td> - </td>
+                    <td>A JSON object holding data about a single movie, structured like:
+                        <pre>
+                            <code>
+                                {
+                                    "Title": "Movie One",
+                                    "Description": "That's a description",
+                                    "Genre": {
+                                        "Name": "Comedy",
+                                        "Description": "Comedy is funny stuff"
+                                    },
+                                    "Director": {
+                                        "Name": "Dir Ector",
+                                        "Bio": "About Dir Ector",
+                                        "Birth": 1988
+                                    },
+                                    "Actors": ["Act Or", "Ac Tor"],
+                                    "ImageURL": "https://url.com",
+                                    "Featured": false
+                                }
+                            </code>
+                        </pre> 
+                    </td>
+                </tr>
+                <tr>
+                    <td>Get data about a genre</td>
+                    <td>/movies/genre/:genreName</td>
+                    <td>GET</td>
+                    <td>:genreName (the name of the genre (e.g. “Thriller”))</td>
+                    <td> - </td>
+                    <td>A JSON object holding the name and description of a genre, structured like:
+                        <pre>
+                            <code>
+                                {
+                                    "Name": "Comedy",
+                                    "Description": "Comedy is funny stuff"
+                                }  
+                            </code>
+                        </pre> 
+                    </td>
+                </tr>
+                <tr>
+                    <td>Get data about a director by name</td>
+                    <td>/movies/directors/:directorName</td>
+                    <td>GET</td>
+                    <td>:directorName (the name of the movie director) 
+                        </td>
+                    <td> - </td>
+                    <td>A JSON object holding data about the specified director, structured like:
+                        <pre>
+                            <code>
+                                {
+                                    "Name": "Dir Ector",
+                                    "Bio": "About Dir Ector",
+                                    "Birth": 1988
+                                }  
+                            </code>
+                        </pre> 
+                    </td>
+                </tr>
+                <tr>
+                    <td>Allow new users to register</td>
+                    <td>/users</td>
+                    <td>POST</td>
+                    <td> - </td>
+                    <td>A JSON object holding data about the user to add, structured like:
+                        <pre>
+                            <code>
+                                {
+                                    username: "Ano Nymous",
+                                    password: "greatPassword3",
+                                    email: "email3@mail.com",
+                                    dataOfBirth: "3/1/1995",
+                                    favoriteMovies: []
+                                }     
+                            </code>
+                        </pre>
+                    </td>
+                    <td>A JSON object holding data about the new user, including their created ID, structured like:
+                        <pre>
+                            <code>
+                                {
+                                    id: 3,
+                                    username: "Ano Nymous",
+                                    password: "greatPassword3",
+                                    email: "email3@mail.com",
+                                    dataOfBirth: "3/1/1995",
+                                    favoriteMovies: []
+                                }   
+                            </code>
+                        </pre> 
+                    </td>
+                </tr>
+                <tr>
+                    <td>Allow users to update their user info</td>
+                    <td>/users/:username</td>
+                    <td>PUT</td>
+                    <td>:username (the username of the user)</td>
+                    <td>A JSON object holding data about the existing user, structured like:
+                        <pre>
+                            <code>
+                                {
+                                    username: "Ano Nymous",
+                                    password: "greatPassword3",
+                                    email: "email3@mail.com",
+                                    dataOfBirth: "3/1/1995",
+                                    favoriteMovies: []
+                                }     
+                            </code>
+                        </pre>
+                    </td>
+                    <td>A JSON object holding the updated user data, including their ID, structured like:
+                        <pre>
+                            <code>
+                                {
+                                    id: 3,
+                                    username: "Axel Doe",
+                                    password: "greatPassword3",
+                                    email: "email3@mail.com",
+                                    dataOfBirth: "3/1/1995",
+                                    favoriteMovies: []
+                                }                                    
+                            </code>
+                        </pre> 
+                    </td>
+                </tr>
+                <tr>
+                    <td>Allow users to add a movie to their list of favorites</td>
+                    <td>/users/:username/movies/:movieID</td>
+                    <td>POST</td>
+                    <td>:username (the username of the user), :movieID (the Id of the added movie)</td>
+                    <td> - </td>
+                    <td>A JSON object holding the updated user data, including the new favorited movie, structured like:
+                        <pre>
+                            <code>
+                                {
+                                    id: 1,
+                                    username: "Jane Doe",
+                                    password: "greatPassword",
+                                    email: "email@mail.com",
+                                    dataOfBirth: "1/1/1995",
+                                    favoriteMovies: ["Movie Two"]
+                                }
+                                                                     
+                            </code>
+                        </pre> 
+                    </td>
+                </tr>
+                <tr>
+                    <td>Allow users to remove a movie from their list of favorites</td>
+                    <td>/users/:username/movies/:movieID</td>
+                    <td>DELETE</td>
+                    <td>:username (the username of the user), :movieID (the Id of the added movie)</td>
+                    <td> - </td>
+                    <td>A text message indicating whether the movie was successfully removed from favorites</td>
+                </tr>
+                <tr>
+                    <td>Allow existing users to deregister </td>
+                    <td>/users/:username</td>
+                    <td>DELETE</td>
+                    <td>:username (the username of the user)</td>
+                    <td> - </td>
+                    <td>A text message indicating whether the user was successfully deregistered</td>
+                </tr>
+            </tbody>
+        </table>
     </body>
 </html>
