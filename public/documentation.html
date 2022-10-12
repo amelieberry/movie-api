@@ -161,28 +161,17 @@
                 </tr>
                 <tr>
                     <td>Allow users to add a movie to their list of favorites</td>
-                    <td>/users/:username/movies/:movieTitle</td>
+                    <td>/users/:id/:movieTitle</td>
                     <td>POST</td>
-                    <td>:username (the username of the user), :movieTitle (the title of the added movie)</td>
+                    <td>:id (the id of the user), :movieTitle (the title of the added movie)</td>
                     <td> - </td>
-                    <td>A JSON object holding the updated user data, including the new favorited movie, structured like:<br>
-                        <code>
-                            {
-                                id: 1,
-                                username: "Jane Doe",
-                                password: "greatPassword",
-                                email: "email@mail.com",
-                                dataOfBirth: "1/1/1995",
-                                favoriteMovies: ["Movie Two"]
-                            }                                      
-                        </code>
-                    </td>
+                    <td>A text message indicating whether the movie was successfully added to favorites</td>
                 </tr>
                 <tr>
                     <td>Allow users to remove a movie from their list of favorites</td>
-                    <td>/users/:username/movies/:movieTitle</td>
+                    <td>/users/:id/:movieTitle</td>
                     <td>DELETE</td>
-                    <td>:username (the username of the user), :movieTitle (the title of the added movie)</td>
+                    <td>:id (the id of the user), :movieTitle (the title of the added movie)</td>
                     <td> - </td>
                     <td>A text message indicating whether the movie was successfully removed from favorites</td>
                 </tr>
