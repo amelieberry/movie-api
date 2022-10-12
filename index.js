@@ -85,7 +85,6 @@ let movies = [
 ];
 
 //CREATE
-
 // Allow new users to register
 app.post('/users', (req, res) => {
     const newUser = req.body;
@@ -100,7 +99,6 @@ app.post('/users', (req, res) => {
 });
 
 // READ
-
 // GET requests
 app.get('/', (req, res) => {
     res.send('test text');
@@ -144,6 +142,22 @@ app.get('/movies/directors/:directorName', (req, res) => {
         res.status(200).json(director);
     } else {
         res.status(400).send('No such director');
+    }
+});
+
+// UPDATE
+// Allow users to update their user info
+app.put('/users/:id', (req, res) => {
+    const { id } = req.params;
+    const updatedUser = req.body;
+
+    let user = users.find(user => user.id == id);
+
+    if (user) {
+        user.username = updatedUser.username;
+        res.status(200).json(user);
+    } else {
+        res.status(400).send('No such user')
     }
 });
 

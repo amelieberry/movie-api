@@ -131,12 +131,13 @@
                 </tr>
                 <tr>
                     <td>Allow users to update their user info</td>
-                    <td>/users/:username</td>
+                    <td>/users/:id</td>
                     <td>PUT</td>
-                    <td>:username (the username of the user)</td>
+                    <td>:id (the ID of the user)</td>
                     <td>A JSON object holding data about the existing user, structured like:
                         <code>
                             {
+                                id: 3,
                                 username: "Ano Nymous",
                                 password: "greatPassword3",
                                 email: "email3@mail.com",
@@ -160,9 +161,9 @@
                 </tr>
                 <tr>
                     <td>Allow users to add a movie to their list of favorites</td>
-                    <td>/users/:username/movies/:movieID</td>
+                    <td>/users/:username/movies/:movieTitle</td>
                     <td>POST</td>
-                    <td>:username (the username of the user), :movieID (the Id of the added movie)</td>
+                    <td>:username (the username of the user), :movieTitle (the title of the added movie)</td>
                     <td> - </td>
                     <td>A JSON object holding the updated user data, including the new favorited movie, structured like:<br>
                         <code>
@@ -179,17 +180,17 @@
                 </tr>
                 <tr>
                     <td>Allow users to remove a movie from their list of favorites</td>
-                    <td>/users/:username/movies/:movieID</td>
+                    <td>/users/:username/movies/:movieTitle</td>
                     <td>DELETE</td>
-                    <td>:username (the username of the user), :movieID (the Id of the added movie)</td>
+                    <td>:username (the username of the user), :movieTitle (the title of the added movie)</td>
                     <td> - </td>
                     <td>A text message indicating whether the movie was successfully removed from favorites</td>
                 </tr>
                 <tr>
                     <td>Allow existing users to deregister </td>
-                    <td>/users/:username</td>
+                    <td>/users/:id</td>
                     <td>DELETE</td>
-                    <td>:username (the username of the user)</td>
+                    <td>:id (the id of the user)</td>
                     <td> - </td>
                     <td>A text message indicating whether the user was successfully deregistered</td>
                 </tr>
