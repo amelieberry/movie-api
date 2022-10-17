@@ -43,7 +43,7 @@ app.post('/users', (req, res) => {
         })
         .catch((error) => {
             console.error(error);
-            res.status(500).send('Error:' + error);
+            res.status(500).send('Error: ' + error);
         })
     }
   })
@@ -68,9 +68,34 @@ app.post('/users/:id/:movieTitle', (req, res) => {
 });
 
 // READ
+
 // GET requests
 app.get('/', (req, res) => {
     res.send('test text');
+});
+
+//GET all Users 
+app.get('/users', (req, res) => {
+    Users.find()
+    .then((users) => {
+        res.status(201).json(users);
+    })
+    .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err)
+    })
+})
+
+// GET a user by Username
+app.get('/users/:Username', (req, res) => {
+    Users.findOne({Username: req.params.Username})
+    .then((user) => {
+        res.json(user);
+    })
+    .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+    });
 });
 
 // GET a list of all movies
