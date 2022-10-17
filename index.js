@@ -1,20 +1,21 @@
 const express = require('express'),
-    app = express(),
     morgan = require('morgan'),
     fs = require('fs'),
     path = require('path'),
     bodyParser = require('body-parser'),
-    uuid = require('uuid'),
-    mongoose = require('mongoose'),
-    Models = require('./models.js'),
-    Movies = Models.Movie,
-    Users = Models.User;
+    uuid = require('uuid');
 
+const app = express();
+const mongoose = require('mongoose');
+const Models = require('./models.js');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+const Movies = Models.Movie;
+const Users = Models.User;
+
 //Allow mongoose to connect to database 
-mongoose.connect('mongodb://localhost:27017/trackmDB', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://192.168.2.163:27017/trackmDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Append Morgan logs to log.txt
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
@@ -25,15 +26,31 @@ app.use(morgan('combined', {stream: accessLogStream}));
 //CREATE
 // Allow new users to register
 app.post('/users', (req, res) => {
-    const newUser = req.body;
-
-    if (newUser.Username) {
-        newUser.id = uuid.v4();
-        Users.push(newUser);
-        res.status(201).json(newUser);
+  Users.findOne({Username: req.body.Username})
+  .then((user) => {
+    if (user) {
+        return res.status(400).send(req.body.Username + 'already exists');
     } else {
-        res.status(400).send('users need names');
+        Users
+        .create({
+            Username: req.body.Username,
+            Password: req.body.Password,
+            Email: req.body.Email,
+            Birthday: req.body.Birthday
+        })
+        .then((user) => {
+            res.status(201).json(user)
+        })
+        .catch((error) => {
+            console.error(error);
+            res.status(500).send('Error:' + error);
+        })
     }
+  })
+  .catch((error) => {
+    console.error(error);
+    res.status(500).send('Error:' + error)
+  }); 
 });
 
 // Allow users to add a movie to their list of favorites
