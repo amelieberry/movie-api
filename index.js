@@ -4,9 +4,17 @@ const express = require('express'),
     fs = require('fs'),
     path = require('path'),
     bodyParser = require('body-parser'),
-    uuid = require('uuid');
+    uuid = require('uuid'),
+    mongoose = require('mongoose'),
+    Models = require('./models.js'),
+    Movies = Models.Movie,
+    Users = Models.User;
 
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+//Allow mongoose to connect to database 
+mongoose.connect('mongodb://localhost:27017/trackmDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Append Morgan logs to log.txt
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
@@ -14,84 +22,14 @@ const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {f
 //set up the logger
 app.use(morgan('combined', {stream: accessLogStream}));
 
-let users = [
-    {
-        id: 1,
-        username: "Jane Doe",
-        password: "greatPassword",
-        email: "email@mail.com",
-        dataOfBirth: "1/1/1995",
-        favoriteMovies: []
-    },
-    {
-        id: 2,
-        username: "John Doe",
-        password: "greatPassword2",
-        email: "email2@mail.com",
-        dataOfBirth: "2/1/1995",
-        favoriteMovies: ["Movie One"]
-    }
-];
-
-let movies = [
-    {
-        "Title": "Movie One",
-        "Description": "That's a description",
-        "Genre": {
-            "Name": "Comedy",
-            "Description": "Comedy is funny stuff"
-        },
-        "Director": {
-            "Name": "Dir Ector",
-            "Bio": "About Dir Ector",
-            "Birth": 1988
-        },
-        "Actors": ["Act Or", "Ac Tor"],
-        "ImageURL": "https://url.com",
-        "Featured": false
-    },
-    {
-        "Title": "Movie Two",
-        "Description": "That's a description",
-        "Genre": {
-            "Name": "Action",
-            "Description": "Action is less talking more acting"
-        },
-        "Director": {
-            "Name": "Direc Tor",
-            "Bio": "About Direc Tor",
-            "Birth": 1950
-        },
-        "Actors": ["Act Or", "A C Tor"],
-        "ImageURL": "https://url2.com",
-        "Featured": false
-    },
-    {
-        "Title": "Movie Three",
-        "Description": "That's a description",
-        "Genre": {
-            "Name": "Sci-Fi",
-            "Description": "Sci-Fi is a bunch of crazy stuff happening"
-        },
-        "Director": {
-            "Name": "Di Rector",
-            "Bio": "About Di Rector",
-            "Birth": 1976
-        },
-        "Actors": ["Actor", "Ac Tor"],
-        "ImageURL": "https://url3.com",
-        "Featured": false
-    }
-];
-
 //CREATE
 // Allow new users to register
 app.post('/users', (req, res) => {
     const newUser = req.body;
 
-    if (newUser.username) {
+    if (newUser.Username) {
         newUser.id = uuid.v4();
-        users.push(newUser);
+        Users.push(newUser);
         res.status(201).json(newUser);
     } else {
         res.status(400).send('users need names');
