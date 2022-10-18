@@ -92,7 +92,7 @@ app.get('/users', (req, res) => {
 app.get('/users/:Username', (req, res) => {
     Users.findOne({Username: req.params.Username})
     .then((user) => {
-        res.json(user);
+        res.status(201).json(user);
     })
     .catch((err) => {
         console.error(err);
@@ -113,15 +113,15 @@ app.get('/movies', (req, res) => {
 });
 
 // GET data about a single movie by title
-app.get('/movies/:title', (req, res) => {
-    const { title } = req.params;
-    const movie = movies.find(movie => movie.Title === title);
-
-    if (movie) {
+app.get('/movies/:Title', (req, res) => {
+    Movies.findOne({Title: req.params.Title})
+    .then((movie) => {
         res.status(200).json(movie);
-    } else {
-        res.status(400).send('No such movie');
-    }
+    })
+    .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+    });
 });
 
 // GET data about a genre
