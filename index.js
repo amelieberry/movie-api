@@ -137,15 +137,15 @@ app.get('/movies/Genre/:genreName', (req, res) => {
 });
 
 // GET data about a director by name
-app.get('/movies/directors/:directorName', (req, res) => {
-    const { directorName } = req.params;
-    const director = movies.find(movie => movie.Director === directorName).Director;
-
-    if (director) {
+app.get('/movies/Director/:directorName', (req, res) => {
+    Movies.find({'Director.Name': req.params.directorName})
+    .then((director) => {
         res.status(200).json(director);
-    } else {
-        res.status(400).send('No such director');
-    }
+    })
+    .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+    })       
 });
 
 // UPDATE
