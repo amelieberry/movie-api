@@ -173,17 +173,19 @@ app.put('/users/:Username', (req, res) => {
 
 // DELETE
 // Allow users to remove a movie from their list of favorites
-app.delete('/users/:id/:movieTitle', (req, res) => {
-    const { id, movieTitle } = req.params;
-
-    let user = users.find(user => user.id == id);
-
-    if (user) {
-        user.favoriteMovies = user.favoriteMovies.filter(title => title !== movieTitle);
-        res.status(200).send(`${movieTitle} has been removed from user ${id}'s array of favorite movies`);
-    } else {
-        res.status(400).send('No such user');
-    } 
+app.delete('/users/:Username/:movies/:MovieID', (req, res) => {
+    Users.findOneAndUpdate({Username: req.params.Username}, {
+        $pull: {FavoriteMovies: req.params.MovieID}
+    },
+    {new: true}, //makes sure that the updated document is returned
+    (err, updatedUser) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send("Error: " + err);
+        } else {
+            res.json(updatedUser);
+        }
+    });
 });
 
 // Allow existing users to deregister 
