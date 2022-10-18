@@ -180,17 +180,19 @@ app.delete('/users/:id/:movieTitle', (req, res) => {
 });
 
 // Allow existing users to deregister 
-app.delete('/users/:id/', (req, res) => {
-    const { id } = req.params;
-
-    let user = users.find(user => user.id == id);
-
-    if (user) {
-        users =  users.filter(user => user.id != id);
-        res.status(200).send(`user ${id} has been deleted`);
-    } else {
-        res.status(400).send('No such user');
-    } 
+app.delete('/users/:Username/', (req, res) => {
+    Users.findOneAndRemove({Username: req.params.Username})
+    .then((user) => {
+        if (!user) {
+            res.status(400).send(req.params.Username + ' was not found');
+        } else {
+            res.status(200).send(req.params.Username + ' was deleted');
+        }
+    })
+    .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+    });
 });
 
 // Serve the documentation.html file from the public folder
