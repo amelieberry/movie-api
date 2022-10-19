@@ -14,6 +14,11 @@ app.use(bodyParser.json());
 const Movies = Models.Movie;
 const Users = Models.User;
 
+let auth = require('./auth')(app);
+
+const passport = require('passport');
+require('./passport');
+
 //Allow mongoose to connect to database 
 mongoose.connect('mongodb://192.168.2.163:27017/trackmDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
