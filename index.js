@@ -5,6 +5,7 @@ const express = require('express'),
     bodyParser = require('body-parser'),
     uuid = require('uuid');
 
+const { check, validationResult } = require('express-validator');
 const app = express();
 const mongoose = require('mongoose');
 const Models = require('./models.js');
@@ -46,13 +47,30 @@ app.use(morgan('combined', {stream: accessLogStream}));
 
 //CREATE
 // Allow new users to register
-app.post('/users', (req, res) => {
+app.post('/users', 
+// validation
+[
+    check('Username', 'Username is required').isLength({min: 5}),
+    check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+    check('Password', 'Password is required').not().isEmpty(),
+    check('Email', 'Email does not appear to be valid').isEmail()
+], (req, res) => {
+    //check validation object for errors
+    let errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(442).json({ errors: errors.array() });
+    }
+
     let hashedPassword = Users.hashPassword(req.body.Password); // Hash any password entered by the user when registering before storing it in the MongoDB database 
     Users.findOne({Username: req.body.Username})
+    // Search to see if a user with the requested username already exists
     .then((user) => {
         if (user) {
+            // If the user is found, send a response that it already exists
             return res.status(400).send(req.body.Username + 'already exists');
         } else {
+            // create the new user if existing not found
             Users
             .create({
                 Username: req.body.Username,
@@ -95,7 +113,7 @@ app.post('/users/:Username/:movies/:MovieID', passport.authenticate('jwt', {sess
 
 // GET requests
 app.get('/', (req, res) => {
-    res.send('test text');
+    res.send('Welcome to Track\'M');
 });
 
 //GET all Users 
@@ -196,12 +214,27 @@ app.get('/movies/Director/:Name', passport.authenticate('jwt', {session: false})
 
 // UPDATE
 // Update user info, by Username
-app.put('/users/:Username', passport.authenticate('jwt', {session: false}), (req, res) => {
+app.put('/users/:Username', passport.authenticate('jwt', {session: false}), 
+// validation
+[
+    check('Username', 'Username is required').isLength({min: 5}),
+    check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+    check('Password', 'Password is required').not().isEmpty(),
+    check('Email', 'Email does not appear to be valid').isEmail()
+], (req, res) => {
+    //check validation object for errors
+    let errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(442).json({ errors: errors.array() });
+    }
+
+    // look for matching user and update it
     Users.findOneAndUpdate({Username: req.params.Username}, 
         {$set:
             {
                 Username: req.body.Username,
-                Password: req.body.Password,
+                Password: hashedPassword,
                 Email: req.body.Email,
                 Birthday: req.body.Birthday
             }
