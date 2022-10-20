@@ -47,31 +47,32 @@ app.use(morgan('combined', {stream: accessLogStream}));
 //CREATE
 // Allow new users to register
 app.post('/users', (req, res) => {
-  Users.findOne({Username: req.body.Username})
-  .then((user) => {
-    if (user) {
-        return res.status(400).send(req.body.Username + 'already exists');
-    } else {
-        Users
-        .create({
-            Username: req.body.Username,
-            Password: req.body.Password,
-            Email: req.body.Email,
-            Birthday: req.body.Birthday
-        })
-        .then((user) => {
-            res.status(201).json(user)
-        })
-        .catch((error) => {
-            console.error(error);
-            res.status(500).send('Error: ' + error);
-        })
-    }
-  })
-  .catch((error) => {
-    console.error(error);
-    res.status(500).send('Error:' + error)
-  }); 
+    let hashedPassword = Users.hashPassword(req.body.Password); // Hash any password entered by the user when registering before storing it in the MongoDB database 
+    Users.findOne({Username: req.body.Username})
+    .then((user) => {
+        if (user) {
+            return res.status(400).send(req.body.Username + 'already exists');
+        } else {
+            Users
+            .create({
+                Username: req.body.Username,
+                Password: hashedPassword,
+                Email: req.body.Email,
+                Birthday: req.body.Birthday
+            })
+            .then((user) => {
+                res.status(201).json(user)
+            })
+            .catch((error) => {
+                console.error(error);
+                res.status(500).send('Error: ' + error);
+            })
+        }
+    })
+    .catch((error) => {
+        console.error(error);
+        res.status(500).send('Error:' + error)
+    }); 
 });
 
 // Allow users to add a movie to their list of favorites
