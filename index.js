@@ -232,6 +232,7 @@ app.put('/users/:Username', passport.authenticate('jwt', {session: false}),
     }
 
     // look for matching user and update it
+    let hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOneAndUpdate({Username: req.params.Username}, 
         {$set:
             {
