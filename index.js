@@ -168,7 +168,7 @@ app.get('/movies/:Title', passport.authenticate('jwt', {session: false}), (req, 
 
 // GET data about a genre, including matching movies, by name
 app.get('/movies/Genre/:Name', passport.authenticate('jwt', {session: false}), async (req, res) => {
-    const { Name } = req.params;
+    const { Name } = req.params
     try {
         const genre = await Movies.findOne({'Genre.Name': Name}, {'Genre': true, '_id': false})
         const matchingMovies = await Movies.find({'Genre.Name': Name})
@@ -180,10 +180,9 @@ app.get('/movies/Genre/:Name', passport.authenticate('jwt', {session: false}), a
     }
 });
 
-
 // GET data about a director, including matching movies, by name
 app.get('/movies/Director/:Name', passport.authenticate('jwt', {session: false}), async (req, res) => {
-    const { Name } = req.params;
+    const { Name } = req.params
     try {
         const director = await Movies.findOne({'Director.Name': Name}, {'Director': true, '_id': false})
         const matchingMovies = await Movies.find({'Director.Name': Name})
@@ -194,7 +193,6 @@ app.get('/movies/Director/:Name', passport.authenticate('jwt', {session: false})
         res.status(500).send('Error: ' + err);
     }     
 });
-
 
 // UPDATE
 // Update user info, by Username
