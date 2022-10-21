@@ -166,53 +166,35 @@ app.get('/movies/:Title', passport.authenticate('jwt', {session: false}), (req, 
     });
 });
 
-// GET data about a genre by name
-app.get('/movies/Genre/:Name', passport.authenticate('jwt', {session: false}), (req, res) => {
-    Movies.findOne({'Genre.Name': req.params.Name})
-    .then((movies) => {
-        res.status(200).send(movies.Genre);
-    })
-    .catch((err) => {
+// GET data about a genre, including matching movies, by name
+app.get('/movies/Genre/:Name', passport.authenticate('jwt', {session: false}), async (req, res) => {
+    const { Name } = req.params;
+    try {
+        const genre = await Movies.findOne({'Genre.Name': Name}, {'Genre': true, '_id': false})
+        const matchingMovies = await Movies.find({'Genre.Name': Name})
+        res.status(200).send(genre, matchingMovies);
+    }    
+    catch(err) {
         console.error(err);
         res.status(500).send('Error: ' + err);
-    })
+    }
 });
 
-// GET all movies by Genre
-// app.get('/movies/Genre/:Name', (req, res) => {
-//     Movies.find({'Genre.Name': req.params.Name})
-//     .then((movies) => {
-//         res.status(200).send(movies);
-//     })
-//     .catch((err) => {
-//         console.error(err);
-//         res.status(500).send('Error: ' + err);
-//     })
-// });
 
-// GET data about a director by name
-app.get('/movies/Director/:Name', passport.authenticate('jwt', {session: false}), (req, res) => {
-    Movies.findOne({'Director.Name': req.params.Name})
-    .then((movies) => {
-        res.status(200).send(movies.Director);
-    })
-    .catch((err) => {
+// GET data about a director, including matching movies, by name
+app.get('/movies/Director/:Name', passport.authenticate('jwt', {session: false}), async (req, res) => {
+    const { Name } = req.params;
+    try {
+        const director = await Movies.findOne({'Director.Name': Name}, {'Director': true, '_id': false})
+        const matchingMovies = await Movies.find({'Director.Name': Name})
+        res.status(200).send(director, matchingMovies);
+    } 
+    catch(err) {
         console.error(err);
         res.status(500).send('Error: ' + err);
-    })      
+    }     
 });
 
-// GET all movies by one Director
-// app.get('/movies/Director/:Name', (req, res) => {
-//     Movies.find({'Director.Name': req.params.Name})
-//     .then((director) => {
-//         res.status(200).json(director);
-//     })
-//     .catch((err) => {
-//         console.error(err);
-//         res.status(500).send('Error: ' + err);
-//     }) 
-// });
 
 // UPDATE
 // Update user info, by Username
