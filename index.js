@@ -172,7 +172,7 @@ app.get('/movies/Genre/:Name', passport.authenticate('jwt', {session: false}), a
     try {
         const genre = await Movies.findOne({'Genre.Name': Name}, {'Genre': true, '_id': false})
         const matchingMovies = await Movies.find({'Genre.Name': Name})
-        res.status(200).send(genre, matchingMovies);
+        res.status(200).send({genre, matchingMovies});
     }    
     catch(err) {
         console.error(err);
@@ -186,7 +186,7 @@ app.get('/movies/Director/:Name', passport.authenticate('jwt', {session: false})
     try {
         const director = await Movies.findOne({'Director.Name': Name}, {'Director': true, '_id': false})
         const matchingMovies = await Movies.find({'Director.Name': Name})
-        res.status(200).send(director, matchingMovies);
+        res.status(200).send({director, matchingMovies});
     } 
     catch(err) {
         console.error(err);
