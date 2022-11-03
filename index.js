@@ -12,11 +12,11 @@ const Models = require('./models.js');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-const cors = require('cors');
-app.use(cors());
-
 const Movies = Models.Movie;
 const Users = Models.User;
+
+const cors = require('cors');
+app.use(cors());
 
 let auth = require('./auth')(app);
 
