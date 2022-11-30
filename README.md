@@ -13,8 +13,9 @@ The web application provides users with access to information about different mo
 * Allow existing users to deregister (showing only a text that a user email has been removed)
 
 ## Links
-* Documentation: https://trackm-app.herokuapp.com/documentation.html
-* Live App: https://trackm-app.herokuapp.com/
+* Documentation: https://trackm.onrender.com/documentation.html
+* Live App: https://trackm.onrender.com/
+* Client-side: https://github.com/amelieberry/trackm-client 
 
 
 ## Built with
