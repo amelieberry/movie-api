@@ -43,7 +43,7 @@ mongoose.connect(process.env.CONNECTION_URI, {
 });
 
 // Append Morgan logs to log.txt
-const accessLogStream = fs.createWriteStream(path.join(__dirname, "log.txt"), {
+const accessLogStream = fs.createWriteStream(path.join("/tmp/", "log.txt"), {
   flags: "a",
 });
 
