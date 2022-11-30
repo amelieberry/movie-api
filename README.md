@@ -15,8 +15,7 @@ The web application provides users with access to information about different mo
 ## Links
 * Documentation: https://trackm.onrender.com/documentation.html
 * Live App: https://trackm.onrender.com/
-* Client-side: https://github.com/amelieberry/trackm-client 
-
+* Client-side: https://trackm-client.netlify.app
 
 ## Built with
 * Node.js
