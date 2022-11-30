@@ -15,7 +15,8 @@ app.use(bodyParser.json());
 const cors = require("cors");
 
 // Allow access only to specific origins
-let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'http://localhost:1234', 'https://trackm-client.netlify.app', 'https://main--trackm-client.netlify.app'];
+// let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'http://localhost:1234', 'https://trackm-client.netlify.app', 'https://main--trackm-client.netlify.app'];
+let allowedOrigins = ["*"];
 app.use(cors({
     origin: (origin, callback) => {
         if(!origin) return callback(null, true);
