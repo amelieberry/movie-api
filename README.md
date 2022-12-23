@@ -1,5 +1,6 @@
 # Track'M - Movies API
-The web application provides users with access to information about different movies, directors, and genres. Users are able to sign up, update their personal information, and create a list of their favorite movies.
+The complete server-side of the Track'M application, including the server, business logic, and business layers of the application. It consists of a well-designed REST API and architected database built using JavaScript, Node.js, Express, and MongoDB. 
+The REST API is accessed via commonly used HTTP methods like GET and POST. Similar methods (CRUD) are used to retrieve data from the database and store that data in a non-relational way.
 
 ## Features
 * Get a list of all movies 
@@ -14,7 +15,7 @@ The web application provides users with access to information about different mo
 
 ## Links
 * Documentation: https://trackm.onrender.com/documentation.html
-* Live App: https://trackm.onrender.com/
+* Live Api: https://trackm.onrender.com/
 * Client-side: https://trackm-client.netlify.app
 
 ## Built with
