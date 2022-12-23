@@ -1,313 +1,449 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta name="viewport" content="width=device-width initial-scale=1">
-        <title>Movie API Documentation</title>
-    </head>
-    <body>
+  <head>
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <link rel="stylesheet" href="documentation.css" />
+    <title>Movie API Documentation</title>
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="title-container">
         <h1>Movie API Documentation</h1>
-        <h2>Objective</h2>
-        <p>The web application provides users with access to information about different movies, directors, and genres. Users are able to sign up, update their personal information, and create a list of their favorite movies.</p>
-        <h2>Features</h2>
+      </div>
+      <h2>Objective</h2>
+      <div class="section-container">
+        <p>
+          The web application provides users with access to information about
+          different movies, directors, and genres. Users are able to sign up,
+          update their personal information, and create a list of their favorite
+          movies.
+        </p>
+      </div>
+      <h2>Features</h2>
+      <div class="section-container">
         <ul>
-            <li>Return a list of all movies</li>
-            <li>Return (description, genre, director, image URL, whether it is featured or not) about a single movie by title to the user</li>
-            <li>Return data about a genre (description and movies) by name (e.g., “Thriller”)</li>
-            <li>Return data about a director (bio, birth year, death year. and movies) by name</li>
-            <li>Allow new users to register</li>
-            <li>Allow users to update their user info (username, password, email, date of birth)</li>
-            <li>Allow users to add a movie to their list of favorites</li>
-            <li>Allow users to remove a movie from their list of favorites</li>
-            <li>Allow existing users to deregister</li>
+          <li>Return a list of all movies</li>
+          <li>
+            Return (description, genre, director, image URL, whether it is
+            featured or not) about a single movie by title to the user
+          </li>
+          <li>
+            Return data about a genre (description and movies) by name (e.g.,
+            “Thriller”)
+          </li>
+          <li>
+            Return data about a director (bio, birth year, death year. and
+            movies) by name
+          </li>
+          <li>Allow new users to register</li>
+          <li>
+            Allow users to update their user info (username, password, email,
+            date of birth)
+          </li>
+          <li>Allow users to add a movie to their list of favorites</li>
+          <li>Allow users to remove a movie from their list of favorites</li>
+          <li>Allow existing users to deregister</li>
         </ul>
-        <h2>API Endpoints</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Business Logic</th>
-                    <th>URL</th>
-                    <th>HTTP Method</th>
-                    <th>Parameters</th>
-                    <th>Request body data format</th>
-                    <th>Response body data format</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Get a list of all movies</td>
-                    <td>/movies</td>
-                    <td>GET</td>
-                    <td> - </td>
-                    <td> - </td>
-                    <td>A JSON object holding data about all the movies</td>
-                </tr>
-                <tr>
-                    <td>Get data about a single movie by title</td>
-                    <td>/movies/:Title</td>
-                    <td>GET</td>
-                    <td> - </td>
-                    <td> - </td>
-                    <td>A JSON object holding data about a single movie, structured like:<br>
-                        <code>
-                            {
-                                "Genre": {
-                                    "Name": "Thriller",
-                                    "Description": "Thriller film, also known as suspense film or suspense thriller, is a broad film genre that involves excitement and suspense in the audience."
-                                },
-                                "Director": {
-                                    "Name": "Jonathan Demme",
-                                    "Bio": "Robert Jonathan Demme was an American director, producer, and screenwriter.",
-                                    "Birth": "1944",
-                                    "Death": "2017"
-                                },
-                                "Actors": [],
-                                "_id": "634971b23277271a18972f86",
-                                "Title": "Silence of the Lambs",
-                                "ReleaseYear": "1991",
-                                "Description": "A young FBI cadet must receive the help of an incarcerated and manipulative cannibal killer to help catch another serial killer.",
-                                "ImagePath": "https://m.media-amazon.com/images/M/MV5BNjNhZTk0ZmEtNjJhMi00YzFlLWE1MmEtYzM1M2ZmMGMwMTU4XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg",
-                                "Featured": true
-                            }
-                        </code>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Get data about a genre</td>
-                    <td>/movies/Genre/:Name</td>
-                    <td>GET</td>
-                    <td>:Name (the name of the genre (e.g. “Comedy”))</td>
-                    <td> - </td>
-                    <td>A JSON object holding the name, description and movies of a genre, structured like:<br>
-                        <code>
-                            {
-                                "genre": {
-                                    "Genre": {
-                                        "Name": "Comedy",
-                                        "Description": "Comedy is a genre of film in which the main emphasis is on humor. These films are designed to make the audience laugh through amusement and most often work by exaggerating characteristics for humorous effect."
-                                    }
-                                },
-                                "matchingMovies": [
-                                    {
-                                        "Genre": {
-                                            "Name": "Comedy",
-                                            "Description": "Comedy is a genre of film in which the main emphasis is on humor. These films are designed to make the audience laugh through amusement and most often work by exaggerating characteristics for humorous effect."
-                                        },
-                                        "Director": {
-                                            "Name": "Rob Minkoff",
-                                            "Bio": "Robert Ralph Minkoff is an American filmmaker. He is known for directing the double Academy Award-winning animated feature The Lion King, along with directing Stuart Little.",
-                                            "Birth": "1962"
-                                        },
-                                        "Actors": [],
-                                        "_id": "634972153277271a18972f88",
-                                        "Title": "Stuart Little",
-                                        "ReleaseYear": "1999",
-                                        "Description": "When the Littles go to an orphanage to adopt a new family member, a charming young mouse named Stuart is chosen",
-                                        "ImagePath": "https://m.media-amazon.com/images/M/MV5BMDJlZWZiODItMGE3NC00Yzg3LWFhYTYtZTI2YWNlNjExMDE4XkEyXkFqcGdeQXVyMTA0MjU0Ng@@._V1_.jpg",
-                                        "Featured": false,
-                                        "Bio": "Robert Ralph Minkoff is an American filmmaker. He is best known for co-directing The Lion King, and live-action films including Stuart Little, Stuart Little 2, The Haunted Mansion, and The Forbidden Kingdom."
-                                    },
-                                    {
-                                        "Genre": {
-                                            "Name": "Comedy",
-                                            "Description": "Comedy is a genre of film in which the main emphasis is on humor. These films are designed to make the audience laugh through amusement and most often work by exaggerating characteristics for humorous effect."
-                                        },
-                                        "Director": {
-                                            "Name": "Penelope Spheeris",
-                                            "Bio": "Penelope Spheeris is an American film director, producer, and screenwriter. She has directed both documentary and scripted films.",
-                                            "Birth": "1945"
-                                        },
-                                        "Actors": [],
-                                        "_id": "6349758c3277271a18972f8f",
-                                        "Title": "Wayne's World",
-                                        "ReleaseYear": "1992",
-                                        "Description": "Two slacker friends try to promote their public-access cable show.",
-                                        "ImagePath": "https://m.media-amazon.com/images/M/MV5BMDAyNDY3MjUtYmJjYS00Zjc5LTlhM2MtNzgzYjNlOWVkZjkzL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg",
-                                        "Featured": true
-                                    }
-                                ]
-                            }  
-                        </code>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Get data about a director by name</td>
-                    <td>/movies/Director/:Name</td>
-                    <td>GET</td>
-                    <td>:Name (the name of the movie director) 
-                        </td>
-                    <td> - </td>
-                    <td>A JSON object holding data about the specified director including their movies, structured like:<br>
-                        <code>
-                            {
-                                "director": {
-                                    "Director": {
-                                        "Name": "Rob Minkoff",
-                                        "Bio": "Robert Ralph Minkoff is an American filmmaker. He is known for directing the double Academy Award-winning animated feature The Lion King, along with directing Stuart Little.",
-                                        "Birth": "1962"
-                                    }
-                                },
-                                "matchingMovies": [
-                                    {
-                                        "Genre": {
-                                            "Name": "Animated",
-                                            "Description": "Animation is a method in which pictures are manipulated to appear as moving images. In traditional animation, images are drawn or painted by hand on transparent celluloid sheets to be photographed and exhibited on film."
-                                        },
-                                        "Director": {
-                                            "Name": "Rob Minkoff",
-                                            "Bio": "Robert Ralph Minkoff is an American filmmaker. He is known for directing the double Academy Award-winning animated feature The Lion King, along with directing Stuart Little.",
-                                            "Birth": "1962"
-                                        },
-                                        "Actors": [],
-                                        "_id": "634971ea3277271a18972f87",
-                                        "Title": "The Lion King",
-                                        "ReleaseYear": "1994",
-                                        "Description": "This Disney animated feature follows the adventures of the young lion Simba.",
-                                        "ImagePath": "https://m.media-amazon.com/images/M/MV5BYTYxNGMyZTYtMjE3MS00MzNjLWFjNmYtMDk3N2FmM2JiM2M1XkEyXkFqcGdeQXVyNjY5NDU4NzI@._V1_.jpg",
-                                        "Featured": false,
-                                        "Bio": "Robert Ralph Minkoff is an American filmmaker. He is best known for co-directing The Lion King, and live-action films including Stuart Little, Stuart Little 2, The Haunted Mansion, and The Forbidden Kingdom."
-                                    },
-                                    {
-                                        "Genre": {
-                                            "Name": "Comedy",
-                                            "Description": "Comedy is a genre of film in which the main emphasis is on humor. These films are designed to make the audience laugh through amusement and most often work by exaggerating characteristics for humorous effect."
-                                        },
-                                        "Director": {
-                                            "Name": "Rob Minkoff",
-                                            "Bio": "Robert Ralph Minkoff is an American filmmaker. He is known for directing the double Academy Award-winning animated feature The Lion King, along with directing Stuart Little.",
-                                            "Birth": "1962"
-                                        },
-                                        "Actors": [],
-                                        "_id": "634972153277271a18972f88",
-                                        "Title": "Stuart Little",
-                                        "ReleaseYear": "1999",
-                                        "Description": "When the Littles go to an orphanage to adopt a new family member, a charming young mouse named Stuart is chosen",
-                                        "ImagePath": "https://m.media-amazon.com/images/M/MV5BMDJlZWZiODItMGE3NC00Yzg3LWFhYTYtZTI2YWNlNjExMDE4XkEyXkFqcGdeQXVyMTA0MjU0Ng@@._V1_.jpg",
-                                        "Featured": false,
-                                        "Bio": "Robert Ralph Minkoff is an American filmmaker. He is best known for co-directing The Lion King, and live-action films including Stuart Little, Stuart Little 2, The Haunted Mansion, and The Forbidden Kingdom."
-                                    }
-                                ]
-                            }  
-                        </code>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Get a list of all users</td>
-                    <td>/users</td>
-                    <td>GET</td>
-                    <td> - </td>
-                    <td> - </td>
-                    <td>A JSON object holding data about all the users</td>
-                </tr>
-                <tr>
-                    <td>Allow new users to register</td>
-                    <td>/users</td>
-                    <td>POST</td>
-                    <td> - </td>
-                    <td>A JSON object holding data about the user to add, structured like:<br>
-                        <code>
-                            {
-                                "Username": "Anonymous",
-                                "Password": "greatPassword3",
-                                "Email": "email3@gmail.com",
-                                "Birthday": "03/01/1995",
-                            }     
-                        </code>
-                    </td>
-                    <td>A JSON object holding data about the new user, including their created ID, structured like:<br>
-                        <code>
-                            {
-                                "Username": "Anonymous",
-                                "Password": "greatPassword3",
-                                "Email": "email3@gmail.com",
-                                "Birthday": "1995-02-28T23:00:00.000Z",
-                                "FavoriteMovies": [],
-                                "_id": "634ed27075eda577717eaea4",
-                                "__v": 0
-                            }   
-                        </code>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Allow users to update their user info</td>
-                    <td>/users/:Username
-                    </td>
-                    <td>PUT</td>
-                    <td>:Username (the Username of the user)</td>
-                    <td>A JSON object holding data about the existing user, structured like:
-                        <code>
-                            {
-                                "Username": "Anonymous",
-                                "Password": "UPDATEDgreatPassword3",
-                                "Email": "email3@gmail.com",
-                                "Birthday": "03/01/1995",
-                            }     
-                        </code>
-                    </td>
-                    <td>A JSON object holding the updated user data, including their ID, structured like:<br>
-                        <code>
-                            {
-                                "_id": "634ed27075eda577717eaea4",
-                                "Username": "Anonymous",
-                                "Password": "UPDATEDgreatPassword3",
-                                "Email": "email3@gmail.com",
-                                "Birthday": "1995-02-28T23:00:00.000Z",
-                                "FavoriteMovies": [],
-                                "__v": 0
-                            }                                    
-                        </code>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Allow users to add a movie to their list of favorites</td>
-                    <td>/users/:Username/:movies/:MovieID</td>
-                    <td>POST</td>
-                    <td>:Username (the Username of the user), :MovieID (the ID of the added movie)</td>
-                    <td> - </td>
-                    <td>A JSON object holding the updated user data, including their ID, structured like:<br>
-                        <code>
-                            {
-                                "_id": "634ed27075eda577717eaea4",
-                                "Username": "Anonymous",
-                                "Password": "UPDATEDgreatPassword3",
-                                "Email": "email3@gmail.com",
-                                "Birthday": "1995-02-28T23:00:00.000Z",
-                                "FavoriteMovies": [
-                                    "6349736b3277271a18972f8c"
-                                ],
-                                "__v": 0
-                            }                                    
-                        </code>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Allow users to remove a movie from their list of favorites</td>
-                    <td>/users/:Username/:movies/:MovieID</td>
-                    <td>DELETE</td>
-                    <td>:Username (the Username of the user), :MovieID (the ID of the movie to be removed)</td>
-                    <td> - </td>
-                    <td>A JSON object holding the updated user data, including their ID, structured like:<br>
-                        <code>
-                            {
-                                "_id": "634ed27075eda577717eaea4",
-                                "Username": "Anonymous",
-                                "Password": "UPDATEDgreatPassword3",
-                                "Email": "email3@gmail.com",
-                                "Birthday": "1995-02-28T23:00:00.000Z",
-                                "FavoriteMovies": [],
-                                "__v": 0
-                            }                                    
-                        </code>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Allow existing users to deregister </td>
-                    <td>/users/:Username</td>
-                    <td>DELETE</td>
-                    <td>:Username (the Username of the user)</td>
-                    <td> - </td>
-                    <td>A text message indicating whether the user was successfully deregistered</td>
-                </tr>
-            </tbody>
-        </table>
-    </body>
+      </div>
+      <h2>API Endpoints</h2>
+      <div class="section-container">
+        <!--1-->
+        <button type="button" class="collapsible-button">
+          Get a list of all movies
+          <span>+</span>
+        </button>
+        <div class="collapsible-content">
+          <h4>URL</h4>
+          <p>/movies</p>
+          <h4>HTTP Method</h4>
+          <p>GET</p>
+          <h4>Parameters</h4>
+          <p>-</p>
+          <h4>Request body data format</h4>
+          <p>-</p>
+          <h4>Response body data format</h4>
+          <p>A JSON object holding data about all the movies</p>
+        </div>
+        <!--2-->
+        <button type="button" class="collapsible-button">
+          Get data about a single movie by title
+          <span>+</span>
+        </button>
+        <div class="collapsible-content">
+          <h4>URL</h4>
+          <p>/movies/:Title</p>
+          <h4>HTTP Method</h4>
+          <p>GET</p>
+          <h4>Parameters</h4>
+          <p>-</p>
+          <h4>Request body data format</h4>
+          <p>-</p>
+          <h4>Response body data format</h4>
+          <p>
+            A JSON object holding data about a single movie, structured like:
+          </p>
+          <pre><code>
+{ 
+    "Genre": { 
+        "Name": "Thriller", 
+        "Description": "Thriller film, also known as suspense film or suspense thriller, is a broad film genre that involves excitement and suspense in the audience." 
+    },
+    "Director": { 
+        "Name": "Jonathan Demme", 
+        "Bio": "Robert Jonathan Demme was an American director, producer, and screenwriter.",
+        "Birth": "1944", "Death": "2017" 
+    }, 
+    "Actors": [], 
+    "_id": "634971b23277271a18972f86", 
+    "Title": "Silence of the Lambs",
+    "ReleaseYear": "1991", 
+    "Description": "A young FBI cadet must receive the help of an incarcerated and manipulative cannibal killer to help catch another serial killer.", 
+    "ImagePath": "https://m.media-amazon.com/images/M/MV5BNjNhZTk0ZmEtNjJhMi00YzFlLWE1MmEtYzM1M2ZmMGMwMTU4XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg",
+    "Featured": true 
+}
+            </code></pre>
+        </div>
+        <!--3-->
+        <button type="button" class="collapsible-button">
+          Get data about a genre
+          <span>+</span>
+        </button>
+        <div class="collapsible-content">
+          <h4>URL</h4>
+          <p>/movies/Genre/:Name</p>
+          <h4>HTTP Method</h4>
+          <p>GET</p>
+          <h4>Parameters</h4>
+          <p>:Name (the name of the genre (e.g. “Comedy”))</p>
+          <h4>Request body data format</h4>
+          <p>-</p>
+          <h4>Response body data format</h4>
+          <p>
+            A JSON object holding the name, description and movies of a genre,
+            structured like:
+          </p>
+          <pre><code>
+{ 
+    "genre": { 
+        "Genre": { 
+            "Name": "Comedy", 
+            "Description": "Comedy is a genre of film in which the main emphasis is on humor. These films are designed to make the audience laugh through amusement and most often work by exaggerating characteristics for humorous effect." 
+        }
+    }, 
+    "matchingMovies": [ 
+        { 
+            "Genre": { 
+                "Name": "Comedy", 
+                "Description": "Comedy is a genre of film in which the main emphasis is on humor. These films are designed to make the audience laugh through amusement and most often work by exaggerating characteristics for humorous effect." 
+            }, 
+            "Director": { 
+                "Name": "Rob Minkoff", 
+                "Bio": "Robert Ralph Minkoff is an American filmmaker. He is known for directing the double Academy Award-winning animated feature The Lion King, along with directing Stuart Little.", 
+                "Birth": "1962" 
+            },
+            "Actors": [], 
+            "_id": "634972153277271a18972f88", 
+            "Title": "Stuart Little", 
+            "ReleaseYear": "1999", 
+            "Description": "When the Littles go to an orphanage to adopt a new family member, a charming young mouse named Stuart is chosen", 
+            "ImagePath": "https://m.media-amazon.com/images/M/MV5BMDJlZWZiODItMGE3NC00Yzg3LWFhYTYtZTI2YWNlNjExMDE4XkEyXkFqcGdeQXVyMTA0MjU0Ng@@._V1_.jpg",
+            "Featured": false, 
+        },
+        { 
+            "Genre": { 
+                "Name": "Comedy", 
+                "Description": "Comedy is a genre of film in which the main emphasis is on humor. These films are designed to make the audience laugh through amusement and most often work by exaggerating characteristics for humorous effect." 
+            }, 
+            "Director": { 
+                "Name": "Penelope Spheeris", "Bio": "Penelope Spheeris is an American film director, producer, and screenwriter. She has directed both documentary and scripted films.", 
+                "Birth": "1945" 
+            }, 
+            "Actors": [],
+            "_id": "6349758c3277271a18972f8f", 
+            "Title": "Wayne's World",
+            "ReleaseYear": "1992", 
+            "Description": "Two slacker friends try to promote their public-access cable show.", 
+            "ImagePath": "https://m.media-amazon.com/images/M/MV5BMDAyNDY3MjUtYmJjYS00Zjc5LTlhM2MtNzgzY
+jNlOWVkZjkzL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg",
+            "Featured": true 
+        } 
+    ] 
+}
+          </code></pre>
+        </div>
+        <!--4-->
+        <button type="button" class="collapsible-button">
+          Get data about a director by name
+          <span>+</span>
+        </button>
+        <div class="collapsible-content">
+          <h4>URL</h4>
+          <p>/movies/Director/:Name</p>
+          <h4>HTTP Method</h4>
+          <p>GET</p>
+          <h4>Parameters</h4>
+          <p>:Name (the name of the movie director)</p>
+          <h4>Request body data format</h4>
+          <p>-</p>
+          <h4>Response body data format</h4>
+          <p>
+            A JSON object holding data about the specified director including
+            their movies, structured like:
+          </p>
+          <pre><code>
+{
+    "director": {
+        "Director": {
+            "Name": "Rob Minkoff", 
+            "Bio": "Robert Ralph Minkoff is an American filmmaker.He is known for directing the double Academy Award - winning animated feature The Lion King, along with directing Stuart Little.", 
+            "Birth": "1962" 
+        } 
+    }, 
+    "matchingMovies": [
+        { 
+            "Genre": {
+                "Name": "Animated", 
+                "Description": "Animation is a method in which pictures are manipulated to appear as moving images.In traditional animation, images are drawn or painted by hand on transparent celluloid sheets to be photographed and exhibited on film." 
+            }, 
+            "Director": { 
+                "Name": "Rob Minkoff",
+                "Bio": "Robert Ralph Minkoff is an American filmmaker. He is known for directing the double Academy Award- winning animated feature The Lion King, along with directing Stuart Little.", 
+                "Birth": "1962" 
+            },
+            "Actors": [], 
+            "_id": "634971ea3277271a18972f87", 
+            "Title": "The Lion King", 
+            "ReleaseYear": "1994", 
+            "Description": "This Disney animated feature follows the adventures of the young lion Simba.",
+            "ImagePath": "https://m.media-amazon.com/images/M/MV5BYTYxNGMyZTYtMjE3MS00MzNjLWFjNmYtMDk3N2FmM2JiM2M1XkEyXkFqcGdeQXVyNjY5NDU4NzI@._V1_.jpg",
+            "Featured": false 
+        }, 
+        { 
+            "Genre": { 
+                "Name": "Comedy", 
+                "Description": "Comedy is a genre of film in which the main emphasis is on humor.These films are designed to make the audience laugh through amusement and most often work by exaggerating characteristics for humorous effect." 
+            }, 
+            "Director": { 
+                "Name": "Rob Minkoff", 
+                "Bio": "Robert Ralph Minkoff is an American filmmaker.He is known for directing the double Academy Award - winning animated feature The Lion King, along with directing Stuart Little.", 
+                "Birth": "1962"
+            },
+            "Actors": [], 
+            "_id": "634972153277271a18972f88",
+            "Title": "Stuart Little", 
+            "ReleaseYear": "1999", 
+            "Description": "When the Littles go to an orphanage to adopt a new family member, a charming young mouse named Stuart is chosen", 
+            "ImagePath": "https://m.media-amazon.com/images/M/MV5BMDJlZWZiODItMGE3NC00Yzg3LWFhYTYtZTI2YWNlNjExMDE4XkEyXkFqcGdeQXVyMTA0MjU0Ng@@._V1_.jpg",
+            "Featured": false 
+        } 
+    ] 
+}
+          </code></pre>
+        </div>
+        <!--5-->
+        <button type="button" class="collapsible-button">
+          Get a list of all users
+          <span>+</span>
+        </button>
+        <div class="collapsible-content">
+          <h4>URL</h4>
+          <p>/users</p>
+          <h4>HTTP Method</h4>
+          <p>GET</p>
+          <h4>Parameters</h4>
+          <p>-</p>
+          <h4>Request body data format</h4>
+          <p>-</p>
+          <h4>Response body data format</h4>
+          <p>A JSON object holding data about all the users</p>
+        </div>
+        <!--6-->
+        <button type="button" class="collapsible-button">
+          Allow new users to register
+          <span>+</span>
+        </button>
+        <div class="collapsible-content">
+          <h4>URL</h4>
+          <p>/users</p>
+          <h4>HTTP Method</h4>
+          <p>POST</p>
+          <h4>Parameters</h4>
+          <p>-</p>
+          <h4>Request body data format</h4>
+          <p>
+            A JSON object holding data about the user to add, structured like:
+          </p>
+          <pre><code>
+{ 
+    "Username": "Anonymous", 
+    "Password": "greatPassword3", 
+    "Email": "email3@gmail.com", 
+    "Birthday": "03/01/1995", 
+}
+          </code></pre>
+          <h4>Response body data format</h4>
+          <p>
+            A JSON object holding data about the new user, including their
+            created ID, structured like:
+          </p>
+          <pre><code>
+{ 
+    "Username": "Anonymous", 
+    "Password": "greatPassword3", 
+    "Email": "email3@gmail.com", 
+    "Birthday": "1995-02-28T23:00:00.000Z",
+    "FavoriteMovies": [], 
+    "_id": "634ed27075eda577717eaea4", 
+    "__v": 0 
+}
+            </code></pre>
+        </div>
+        <!--7-->
+        <button type="button" class="collapsible-button">
+          Allow users to update their user info
+          <span>+</span>
+        </button>
+        <div class="collapsible-content">
+          <h4>URL</h4>
+          <p>/users/:Username</p>
+          <h4>HTTP Method</h4>
+          <p>PUT</p>
+          <h4>Parameters</h4>
+          <p>:Username (the Username of the user)</p>
+          <h4>Request body data format</h4>
+          <p>
+            A JSON object holding data about the existing user, structured like:
+          </p>
+          <pre><code>
+{ 
+    "Username": "Anonymous", 
+    "Password": "UPDATEDgreatPassword3",
+    "Email": "email3@gmail.com", 
+    "Birthday": "03/01/1995", 
+}
+          </code></pre>
+          <h4>Response body data format</h4>
+          <p>
+            A JSON object holding the updated user data, including their ID,
+            structured like:
+          </p>
+          <pre><code>
+{ 
+    "_id": "634ed27075eda577717eaea4", 
+    "Username": "Anonymous",
+    "Password": "UPDATEDgreatPassword3", 
+    "Email": "email3@gmail.com",
+    "Birthday": "1995-02-28T23:00:00.000Z", 
+    "FavoriteMovies": [], 
+    "__v": 0 
+}
+          </code></pre>
+        </div>
+        <!--8-->
+        <button type="button" class="collapsible-button">
+          Allow users to add a movie to their list of favorites
+          <span>+</span>
+        </button>
+        <div class="collapsible-content">
+          <h4>URL</h4>
+          <p>/users/:Username/:movies/:MovieID</p>
+          <h4>HTTP Method</h4>
+          <p>POST</p>
+          <h4>Parameters</h4>
+          <p>
+            :Username (the Username of the user), :MovieID (the ID of the added
+            movie)
+          </p>
+          <h4>Request body data format</h4>
+          <p>-</p>
+          <h4>Response body data format</h4>
+          <p>
+            A JSON object holding the updated user data, including their ID,
+            structured like:
+          </p>
+          <pre><code>
+{ 
+    "_id": "634ed27075eda577717eaea4", 
+    "Username": "Anonymous",
+    "Password": "UPDATEDgreatPassword3", 
+    "Email": "email3@gmail.com",
+    "Birthday": "1995-02-28T23:00:00.000Z", 
+    "FavoriteMovies": [ "6349736b3277271a18972f8c" ], 
+    "__v": 0 
+}
+          </code></pre>
+        </div>
+        <!--9-->
+        <button type="button" class="collapsible-button">
+          Allow users to remove a movie from their list of favorites
+          <span>+</span>
+        </button>
+        <div class="collapsible-content">
+          <h4>URL</h4>
+          <p>/users/:Username/:movies/:MovieID</p>
+          <h4>HTTP Method</h4>
+          <p>DELETE</p>
+          <h4>Parameters</h4>
+          <p>
+            :Username (the Username of the user), :MovieID (the ID of the added
+            movie)
+          </p>
+          <h4>Request body data format</h4>
+          <p>-</p>
+          <h4>Response body data format</h4>
+          <p>
+            A JSON object holding the updated user data, including their ID,
+            structured like:
+          </p>
+          <pre><code>
+{ 
+    "_id": "634ed27075eda577717eaea4", 
+    "Username": "Anonymous",
+    "Password": "UPDATEDgreatPassword3", 
+    "Email": "email3@gmail.com",
+    "Birthday": "1995-02-28T23:00:00.000Z", 
+    "FavoriteMovies": [], 
+    "__v": 0 
+}
+          </code></pre>
+        </div>
+        <!--10-->
+        <button type="button" class="collapsible-button">
+          Allow existing users to deregister
+          <span>+</span>
+        </button>
+        <div class="collapsible-content">
+          <h4>URL</h4>
+          <p>/users/:Username</p>
+          <h4>HTTP Method</h4>
+          <p>DELETE</p>
+          <h4>Parameters</h4>
+          <p>:Username (the Username of the user)</p>
+          <h4>Request body data format</h4>
+          <p>-</p>
+          <h4>Response body data format</h4>
+          <p>
+            A text message indicating whether the user was successfully
+            deregistered
+          </p>
+        </div>
+      </div>
+    </div>
+    <script>
+      var coll = document.getElementsByClassName("collapsible-button");
+      var i;
+
+      for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function () {
+          this.classList.toggle("active");
+          var content = this.nextElementSibling;
+          if (content.style.display === "block") {
+            content.style.display = "none";
+          } else {
+            content.style.display = "block";
+          }
+        });
+      }
+    </script>
+  </body>
 </html>
