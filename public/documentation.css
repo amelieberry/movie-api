@@ -1,5 +1,7 @@
 body {
     background-color: #eee;
+    font-family: monospace;
+    font-size: 1rem;
 }
 
 span {
@@ -29,8 +31,11 @@ pre {
 
 .section-container {
     background-color: white;
-    border-radius: 10px;
     padding: 10px;
+}
+
+.text {
+    line-height: 1.5rem;
 }
 
 .collapsible-button {
@@ -44,7 +49,6 @@ pre {
     outline: none;
     font-size: 15px;
     font-weight: bold;
-    /* margin-top: 5px; */
   }
   
   .active, .collapsible-button:hover {
