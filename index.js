@@ -131,7 +131,7 @@ app.post(
 
 // GET requests
 app.get("/", (req, res) => {
-  res.send("Welcome to Track'M");
+  res.sendFile(path.join(__dirname, '/index.html'));
 });
 
 //GET all Users
