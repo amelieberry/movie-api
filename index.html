@@ -1,35 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta name="viewport" content="width=device-width initial-scale=1">
-        <meta name="description" content="A movie API to browse and save your favourite movies">
-        <title>Track'M Movie API</title>
+  <head>
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta
+      name="description"
+      content="A movie API to browse and save your favourite movies"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;900&display=swap"
+      rel="stylesheet"
+    />
 
-        <style>
-            body {
-                background-color: #eee;
-                font-family: monospace;
-                margin: 0 auto;
-                max-width: 800px;
-                text-align: center;
-            }
-            .main {
-                background-color: white;
-                padding: 8px;
-            }
+    <title>Track'M Movie API</title>
 
-            .link-button {
-                display: block;
-                line-height: 2rem;
-            }
-        </style>
-    </head>
-    <body>
-        <h1>Track'M Movie API</h1>
-        <div class="main">
-            <p>Welcome to Track'M Movie API</p>
-            <a class="link-button" href="public/documentation.html">View Documentation</a>
-            <a class="link-button" href="https://trackm-client.netlify.app/" target="_blank">See live app</a>
+    <style>
+      html {
+        margin: 0;
+        height: 100vh;
+      }
+      body {
+        background-color: #eee;
+        font-family: monospace;
+        margin: 0 auto;
+        max-width: 800px;
+        text-align: center;
+        font-size: 1rem;
+        height: 80%;
+      }
+      h1 {
+        display: block;
+      }
+      .main {
+        background-color: white;
+        padding: 8px;
+        padding-bottom: 16px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+          0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        margin: auto;
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+      }
+
+      .link-button {
+        display: block;
+        line-height: 2rem;
+      }
+
+      #logo-container {
+        width: 200px;
+        height: 160px;
+        color: #eee;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+      }
+
+      #t-top {
+        height: 10px;
+        width: 198.5px;
+        background-color: black;
+        border: solid 1px black;
+        position: relative;
+        animation: skew 3s infinite;
+        transform-origin: left top;
+        animation-direction: normal;
+      }
+
+      .dotted-line-top {
+        border-top: 5px dashed white;
+        border-bottom: 5px dashed white;
+        width: 198.5px;
+      }
+
+      #main-clapper {
+        background-color: black;
+        height: 116px;
+        width: 200px;
+        color: white;
+        font-size: 160px;
+        text-align: right;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+      }
+
+      #main-clapper p {
+        margin: 0;
+        display: block;
+        font-family: "Montserrat", sans-serif;
+        text-shadow: 0 -1px white;
+      }
+
+      #t-leg {
+        height: 112px;
+        width: 10px;
+        border: 1px solid white;
+        margin: 0;
+        margin-left: 18px;
+      }
+
+      .dotted-line-bottom {
+        border-right: 5.5px dashed white;
+        border-left: 5.5px dashed white;
+        height: 112px;
+      }
+
+      @keyframes skew {
+        0% {
+          transform: skewY(0deg);
+        }
+        100% {
+          transform: skewY(-9deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Track'M Movie API</h1>
+    <div class="main">
+      <p>Welcome to Track'M Movie API</p>
+      <div id="logo-container">
+        <div id="t-top">
+          <div class="dotted-line-top"></div>
         </div>
-    </body>
+        <div id="main-clapper">
+          <div id="t-leg">
+            <div class="dotted-line-bottom"></div>
+          </div>
+          <p>M</p>
+        </div>
+      </div>
+      <div>
+        <a class="link-button" href="public/documentation.html"
+          >View Documentation</a
+        >
+        <a
+          class="link-button"
+          href="https://trackm-client.netlify.app/"
+          target="_blank"
+          >See live app</a
+        >
+      </div>
+    </div>
+  </body>
 </html>
