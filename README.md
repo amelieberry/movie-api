@@ -16,7 +16,8 @@ The REST API is accessed via commonly used HTTP methods like GET and POST. Simil
 ## Links
 * Documentation: https://trackm.onrender.com/documentation.html
 * Live Api: https://trackm.onrender.com/
-* Client-side: https://trackm-client.netlify.app
+* Client-side built with React: https://trackm-client.netlify.app
+* Client-side built with Angular: https://amelieberry.github.io/TrackM-Angular-client/
 
 ## Built with
 * Node.js
