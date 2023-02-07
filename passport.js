@@ -7,7 +7,10 @@ let Users = Models.User,
 JWTStrategy = passportJWT.Strategy,
 ExtractJWT = passportJWT.ExtractJwt;
 
-// LocalStrategy taskes a username and password from request body. Uses Mongoose to check the database for a user with the same username
+/**
+ * LocalStrategy taskes a username and password from request body.
+ * Uses Mongoose to check the database for a user with the same username
+ */
 passport.use(new LocalStrategy({
     usernameField: 'Username',
     passwordField: 'Password'
@@ -35,7 +38,9 @@ passport.use(new LocalStrategy({
     });
 }));
 
-// allows authentication of users based on the JWT submitted alongside their request.
+/** 
+ * allows authentication of users based on the JWT submitted alongside their request.
+*/
 passport.use(new JWTStrategy({
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
     secretOrKey: 'your_jwt_secret'

@@ -51,8 +51,17 @@ const accessLogStream = fs.createWriteStream(path.join("/tmp/", "log.txt"), {
 //set up the logger
 app.use(morgan("combined", { stream: accessLogStream }));
 
-//CREATE
-// Allow new users to register
+// CREATE
+
+/** 
+ * POST new user upon registration if a matching user is not found
+ * Perform checks on Username, Password and Email fields
+ * Hash the user's password
+ * Reguest: Bearer token, user object
+ * @name registerUser
+ * @kind function
+ * @returns new user object
+*/
 app.post(
   "/users",
   // validation
@@ -104,7 +113,16 @@ app.post(
   }
 );
 
-// Allow users to add a movie to their list of favorites
+/**
+ * POST movie to user's list of favorites
+ * Request: Bearer token
+ * @name addFavorite
+ * @kind function
+ * @param Username
+ * @param MovieID
+ * @requires passport
+ * @returns the user object with the new favorite movie added to the FavoriteMovies array
+ */
 app.post(
   "/users/:Username/:movies/:MovieID",
   passport.authenticate("jwt", { session: false }),
@@ -129,12 +147,17 @@ app.post(
 
 // READ
 
-// GET requests
+/** 
+ * send index.html file at endpoint "/"
+*/
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, '/index.html'));
 });
 
-//GET all Users
+/**
+ * GET all Users
+ * @requires passport
+ */
 app.get(
   "/users",
   passport.authenticate("jwt", { session: false }),
@@ -150,7 +173,16 @@ app.get(
   }
 );
 
-// GET a user by Username
+
+/**
+ * GET a user by Username
+ * request: bearer token
+ * @name getUser
+ * @kind function
+ * @param Username
+ * @requires passport
+ * @returns the user object
+ */
 app.get(
   "/users/:Username",
   passport.authenticate("jwt", { session: false }),
@@ -166,7 +198,14 @@ app.get(
   }
 );
 
-// GET a list of all movies
+/**
+ * GET a list of all movies
+ * request: bearer token
+ * @name getMovies
+ * @kind function
+ * @requires passport
+ * @returns the movies array of objects
+ */
 app.get(
   "/movies",
   passport.authenticate("jwt", { session: false }),
@@ -182,7 +221,14 @@ app.get(
   }
 );
 
-// GET data about a single movie by title
+/**
+ * GET data about a single movie by title
+ * @name getMovie
+ * @kind function
+ * @param Title
+ * @requires passport
+ * @returns the movie object
+ */
 app.get(
   "/movies/:Title",
   passport.authenticate("jwt", { session: false }),
@@ -198,7 +244,14 @@ app.get(
   }
 );
 
-// GET data about a genre, including matching movies, by name
+/**
+ * GET data about a genre, including matching movies, by name
+ * @name getGenre
+ * @kind function
+ * @param Name - the name of the genre
+ * @requires passport
+ * @returns A JSON object holding the name, description and movies of a genre
+ */
 app.get(
   "/movies/Genre/:Name",
   passport.authenticate("jwt", { session: false }),
@@ -218,7 +271,14 @@ app.get(
   }
 );
 
-// GET data about a director, including matching movies, by name
+/**
+ * GET data about a director, including matching movies, by name
+ * @name getDirector
+ * @kind function
+ * @param Name - the name of the director
+ * @requires passport
+ * @returns A JSON object holding data about the specified director including their movies
+ */
 app.get(
   "/movies/Director/:Name",
   passport.authenticate("jwt", { session: false }),
@@ -239,7 +299,18 @@ app.get(
 );
 
 // UPDATE
-// Update user info, by Username
+
+/**
+ * PUT updated user info, by Username
+ * Perform checks on Username, Password and Email fields
+ * Hash the user's password
+ * Reguest: Bearer token, user object
+ * @name updateUser
+ * @kind function
+ * @param Username 
+ * @requires passport
+ * @returns A JSON object holding the updated user data, including their ID
+ */
 app.put(
   "/users/:Username",
   passport.authenticate("jwt", { session: false }),
@@ -289,7 +360,17 @@ app.put(
 );
 
 // DELETE
-// Allow users to remove a movie from their list of favorites
+
+/**
+ * DELETE a movie from user's list of favorites
+ * requires bearer token
+ * @name deleteFavorite
+ * @kind function
+ * @param Username
+ * @param MovieID
+ * @requires passport
+ * @returns a message to the user stating that the movie has been removed
+ */
 app.delete(
   "/users/:Username/:movies/:MovieID",
   passport.authenticate("jwt", { session: false }),
@@ -312,7 +393,15 @@ app.delete(
   }
 );
 
-// Allow existing users to deregister
+/**
+ * DELETE user
+ * requires bearer token
+ * @name deleteUser
+ * @kind function
+ * @param Username
+ * @requires passport
+ * @returns A text message indicating whether the user was successfully deregistered 
+ */
 app.delete(
   "/users/:Username/",
   passport.authenticate("jwt", { session: false }),
