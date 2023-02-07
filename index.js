@@ -54,10 +54,9 @@ app.use(morgan("combined", { stream: accessLogStream }));
 // CREATE
 
 /** 
- * POST new user upon registration if a matching user is not found
- * Perform checks on Username, Password and Email fields
+ * POST new user upon registration if a matching user is not found.
+ * Perform checks on Username, Password and Email fields +
  * Hash the user's password
- * Reguest: Bearer token, user object
  * @name registerUser
  * @kind function
  * @returns new user object
@@ -118,8 +117,8 @@ app.post(
  * Request: Bearer token
  * @name addFavorite
  * @kind function
- * @param Username
- * @param MovieID
+ * @param {string} Username user's Username
+ * @param {string} MovieID id of the movie
  * @requires passport
  * @returns the user object with the new favorite movie added to the FavoriteMovies array
  */
@@ -179,7 +178,7 @@ app.get(
  * request: bearer token
  * @name getUser
  * @kind function
- * @param Username
+ * @param {string} Username user's Username
  * @requires passport
  * @returns the user object
  */
@@ -225,7 +224,7 @@ app.get(
  * GET data about a single movie by title
  * @name getMovie
  * @kind function
- * @param Title
+ * @param {string} Title title of the movie
  * @requires passport
  * @returns the movie object
  */
@@ -248,7 +247,7 @@ app.get(
  * GET data about a genre, including matching movies, by name
  * @name getGenre
  * @kind function
- * @param Name - the name of the genre
+ * @param {string} Name the name of the genre
  * @requires passport
  * @returns A JSON object holding the name, description and movies of a genre
  */
@@ -275,7 +274,7 @@ app.get(
  * GET data about a director, including matching movies, by name
  * @name getDirector
  * @kind function
- * @param Name - the name of the director
+ * @param {string} Name the name of the director
  * @requires passport
  * @returns A JSON object holding data about the specified director including their movies
  */
@@ -307,7 +306,7 @@ app.get(
  * Reguest: Bearer token, user object
  * @name updateUser
  * @kind function
- * @param Username 
+ * @param {string} Username user's Username
  * @requires passport
  * @returns A JSON object holding the updated user data, including their ID
  */
@@ -366,8 +365,8 @@ app.put(
  * requires bearer token
  * @name deleteFavorite
  * @kind function
- * @param Username
- * @param MovieID
+ * @param {string} Username user's Username
+ * @param {string} MovieID movie's ID
  * @requires passport
  * @returns a message to the user stating that the movie has been removed
  */
@@ -398,7 +397,7 @@ app.delete(
  * requires bearer token
  * @name deleteUser
  * @kind function
- * @param Username
+ * @param {string} Username user's Username
  * @requires passport
  * @returns A text message indicating whether the user was successfully deregistered 
  */
